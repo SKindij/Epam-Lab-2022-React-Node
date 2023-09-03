@@ -1,6 +1,6 @@
-### RD LAB FE NODEJS HOMEWORK No1
+#### RD LAB FE NODEJS HOMEWORK No1
 
-# Implement web-server which hosts and serves files
+## Implement web-server which hosts and serves files
 
 Requirements:
 * Use standard http module or express framework to implement simple web- server;
@@ -17,3 +17,11 @@ Acceptance criteria:
 * Server returns file content on getFile request, use `filename` url parameter to determine what file you want to retrieve.
 * In case there are no file with provided name found, return 400 status.
 
+Optional criteria:
+* Server handles errors and validates input params for all requests.
+* You can add password protection for files -
+  + with additional(optional) parameter `password` in createFile request,
+  + and additional(optional) parameter `password` in getFile request in url query params.
+* Consider server should handle invalid and empty password for protected files.
+* Ability to modify files content (additional endpoint);
+* Ability to delete files (additional endpoint);
