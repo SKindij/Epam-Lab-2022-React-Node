@@ -1,0 +1,10 @@
+.btn {
+    width: 150px;
+    height: 36px;
+    background-color: white;
+    border: 1px solid purple;
+}
+.btn:hover{
+    color: white;
+    background-color: rgba(128, 0, 128, 0.623);
+}
