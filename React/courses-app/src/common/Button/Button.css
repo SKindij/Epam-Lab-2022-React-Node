@@ -2,7 +2,9 @@
     width: 150px;
     height: 36px;
     background-color: white;
-    border: 1px solid purple;
+    border: 2px solid purple;
+	cursor: pointer;
+	transition-duration: 0.3s;
 }
 .btn:hover{
     color: white;
