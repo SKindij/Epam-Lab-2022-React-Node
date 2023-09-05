@@ -1,0 +1,39 @@
+.course-container {
+    margin: 30px; 
+}
+.course-container__toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.course-container__authors {
+    display: grid;
+    grid-template-columns:  1fr 1fr;
+    margin-top: 30px;
+    border: 1px solid darkmagenta;
+}
+
+.course-title {
+    text-align: center;
+    font-weight: bold;
+}
+
+.course-input {
+    margin-left: 10px;
+}
+.course-btn {
+    margin: 30px;
+    text-align: center;
+}
+
+.course-duration {
+    font-weight: bold;
+}
+
+.course__author {
+    list-style: none;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+}
