@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import Header from './components/Header/Header';
+import Courses from './components/Courses/Courses';
 
 import './App.css'
 
@@ -9,6 +10,7 @@ const App:FC = () => {
     <>
       <h1>Vite + React + TypeScript</h1>
       <Header />
+	  <Courses />
     </>
   );
 };
