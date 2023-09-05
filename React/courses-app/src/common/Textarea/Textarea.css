@@ -1,0 +1,10 @@
+.textarea-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+.textarea {
+    padding: 10px;
+    border: 1px solid yellow;
+    outline: none;
+}
