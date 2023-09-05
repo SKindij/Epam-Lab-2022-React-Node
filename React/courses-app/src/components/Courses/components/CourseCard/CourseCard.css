@@ -1,0 +1,47 @@
+.item__container {
+    display: flex;
+    border: 1px solid green;
+    padding: 0 20px;
+    margin: 30px;
+    height: 200px;
+}
+
+.item__title {
+    margin: 20px 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.item__text {
+    width: 60%;
+    margin-right: 50px;
+}
+
+.item__description {
+    width: 40%;
+    font-size: 18px;
+}
+.item__desc {
+    font-size: 1.2vw;
+}
+
+.item__field {
+    padding: 5px;
+    width: 100%;    
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.item__field:first-child {
+    margin-top: 20px;
+}
+
+.item__field--bold {
+    font-weight: bold;
+}
+
+.item__btn {
+    text-align: center;
+    margin-top: 20px;
+}
