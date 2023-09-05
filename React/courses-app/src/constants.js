@@ -14,7 +14,7 @@ export const mockedCoursesList = [
 		duration: 160,
 		authors: [
 			'27cc3006-e93a-4748-8ca8-73d06aa93b6d',
-			'f762978b-61eb-4096-812b￾ebde22838167',
+			'f762978b-61eb-4096-812b-ebde22838167',
 		],
 	},
 	{
@@ -52,7 +52,6 @@ export const mockedAuthorsList = [
 		name: 'Valentina Larina',
 	},
 ];
-
 export const SEARCH_BUTTON_TEXT = 'Search';
 export const LOGOUT_BUTTON_TEXT = 'Logout';
 export const ADD_BUTTON_TEXT = 'Add new course';
