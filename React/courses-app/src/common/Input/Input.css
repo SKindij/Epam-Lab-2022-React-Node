@@ -1,0 +1,10 @@
+.form {
+    display: flex;
+    flex-direction: column;
+}
+.input {
+    width: 40vw; height: 35px;
+    padding: 0 10px; margin-right: 30px;
+    border: 1px solid orange;
+    outline: none;
+}
