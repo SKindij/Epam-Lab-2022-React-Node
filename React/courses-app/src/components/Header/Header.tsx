@@ -1,9 +1,10 @@
+// Header.tsx
 import { FC } from 'react';
 import './Header.css';
 import Button from '../../common/Button/Button';
 import Logo from './components/Logo/Logo';
 
-import { LOGOUT_BUTTON_TEXT } from '../../constants.js';
+import { LOGOUT_BUTTON_TEXT } from '../../constants';
 
 const Header:FC = () => {
   const handleLogout = () => {
