@@ -1,10 +1,11 @@
-import { FC, ChangeEventHandler } from 'react';
+// Textarea.tsx
+import { FC, ChangeEvent } from 'react';
 import './Textarea.css';
 
 interface TextareaProps {
   labelText:string;
   placeholderText:string;
-  onChange:ChangeEventHandler<HTMLTextAreaElement>;
+  onChange: (event:ChangeEvent<HTMLTextAreaElement>) => void;
   value:string;
 }
 
@@ -18,6 +19,7 @@ const Textarea:FC<TextareaProps> = ({
       <textarea
         className='textarea' onChange={onChange}
         rows={5} name='text'
+		id='text' // для відповідності атрибуту htmlFor
         placeholder={placeholderText} value={value}
       />
     </div>
