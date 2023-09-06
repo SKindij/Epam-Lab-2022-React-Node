@@ -1,25 +1,22 @@
-import React, { FC, useState, ChangeEvent } from 'react';
+// CreateCourse.tsx
+import { FC, useState, ChangeEvent } from 'react';
 import Button from '../../common/Button/Button';
 import Input from '../../common/Input/Input';
 import Textarea from '../../common/Textarea/Textarea';
 import {
-  mockedAuthorsList,
-  mockedCoursesList,
-  CREATE_BUTTON_TEXT,
-  CREATE_AUTHOR_BUTTON_TEXT,
-  ADD_AUTHOR_BUTTON_TEXT,
-  DELETE_AUTHOR_BUTTON_TEXT,
+  mockedAuthorsList, mockedCoursesList,
+  CREATE_BUTTON_TEXT, CREATE_AUTHOR_BUTTON_TEXT,
+  ADD_AUTHOR_BUTTON_TEXT, DELETE_AUTHOR_BUTTON_TEXT,
 } from '../../constants';
 import { pipeDuration } from '../../helpers/pipeDuration';
 import { uniqueId } from '../../helpers/uniqueIdGenerator';
 
 import './CreateCourse.css';
 
-interface CreateCourseProps {
-  setAddCourse: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const CreateCourse:FC<CreateCourseProps> = ({ setAddCourse }) => {
+const CreateCourse:FC<{ setAddCourse: (addCourse:boolean) => void }> = ({
+  setAddCourse,
+}) => {
+  // стани для зберігання даних форми створення курсу та обраних авторів
   const [authors, setAuthors] = useState(mockedAuthorsList);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -27,18 +24,20 @@ const CreateCourse:FC<CreateCourseProps> = ({ setAddCourse }) => {
   const [duration, setDuration] = useState('');
   const [chosenAuthors, setChosenAuthors] = useState<any[]>([]);
 
-  const onTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  // оголошені функції для обробки подій відповідно до введених даних користувачем
+  const onTitleChange = (e:ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
-
-  const onDescriptionChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+  const onDescriptionChange = (e:ChangeEvent<HTMLTextAreaElement>) => {
     setDescription(e.target.value);
   };
-
-  const onAuthorChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const onAuthorChange = (e:ChangeEvent<HTMLInputElement>) => {
     setAuthor(e.target.value);
   };
-
+  const onDurationChange = (e:ChangeEvent<HTMLInputElement>) => {
+    setDuration(e.target.value);
+  };
+  // функція додає нового автора до списку авторів
   const onAuthorAdded = () => {
     if (author.length < 2) {
       alert('Author name should be at least 2 characters');
@@ -53,29 +52,25 @@ const CreateCourse:FC<CreateCourseProps> = ({ setAddCourse }) => {
     setAuthor('');
   };
 
-  const onDurationChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setDuration(e.target.value);
+  // ці функції додають або видаляють авторів із списку обраних авторів
+  const onAuthorChosen = (author:any) => {
+    setChosenAuthors([...chosenAuthors, author]);
+    setAuthors((authors) => authors.filter((item) => item.id !== author.id));
   };
-
-  const onAuthorChosen = (chosenAuthor: any) => {
-    setChosenAuthors([...chosenAuthors, chosenAuthor]);
-    setAuthors((authors) => authors.filter((item) => item.id !== chosenAuthor.id));
-  };
-
-  const onAuthorDeleted = (deletedAuthor: any) => {
+  const onAuthorDeleted = (author:any) => {
     setChosenAuthors((chosenAuthors) =>
-      chosenAuthors.filter((item) => item.id !== deletedAuthor.id)
+      chosenAuthors.filter((item) => item.id !== author.id)
     );
-    setAuthors([...authors, deletedAuthor]);
+    setAuthors([...authors, author]);
   };
-
+  // створює новий курс і додає його до списку курсів
   const onCourseCreate = () => {
-    if (title.length < 2 || description.length < 2 || !chosenAuthors.length || !duration) {
+    if (title.length < 2 || description.length < 2 || !chosenAuthors || !duration) {
       alert('Please, fill in all fields ');
       return;
     }
     const date = new Date().toLocaleDateString();
-    const courseAuthors = chosenAuthors.map((chosenAuthor) => chosenAuthor.id);
+    const courseAuthors = chosenAuthors.map((author) => author.id);
     const newCourse = {
       id: uniqueId(),
       title: title,
@@ -90,28 +85,37 @@ const CreateCourse:FC<CreateCourseProps> = ({ setAddCourse }) => {
     setDuration('');
     setAddCourse(false);
   };
-
+  // закриває форму створення курсу та очищає поля
+  const onCancel = () => {
+    setTitle('');
+    setDescription('');
+    setAuthor('');
+    setDuration('');
+    setChosenAuthors([]);
+    setAddCourse(false);
+  };
+  // значення станів прив'язані до відповідних елементів форми за допомогою value={value}
   return (
     <div className='course-container'>
       <div className='course-container__toolbar'>
         <Input
           labelText='Title'
-          placeholderText='Enter title...'
+          placeholderText='Enter course title...'
           onChange={onTitleChange}
           value={title}
         />
         <Button buttonText={CREATE_BUTTON_TEXT} onClick={onCourseCreate} />
-      </div>
+        <Button buttonText='Cancel' onClick={onCancel} />
+	  </div>
       <Textarea
         labelText='Description'
-        placeholderText='Enter description'
+        placeholderText='Enter course description'
         onChange={onDescriptionChange}
         value={description}
       />
       <div className='course-container__authors'>
         <div className='course-container__author-info'>
           <p className='course-title'>Add author</p>
-
           <div className='course-input'>
             <Input
               labelText='Author name'
@@ -121,9 +125,11 @@ const CreateCourse:FC<CreateCourseProps> = ({ setAddCourse }) => {
             />
           </div>
           <div className='course-btn'>
-            <Button buttonText={CREATE_AUTHOR_BUTTON_TEXT} onClick={onAuthorAdded} />
+            <Button
+              buttonText={CREATE_AUTHOR_BUTTON_TEXT}
+              onClick={onAuthorAdded}
+            />
           </div>
-
           <p className='course-title'>Duration</p>
           <div className='course-input'>
             <Input
@@ -134,7 +140,7 @@ const CreateCourse:FC<CreateCourseProps> = ({ setAddCourse }) => {
               value={duration}
             />
             <p>
-              Duration:
+              Duration:{' '}
               <span className='course-duration'>
                 {duration ? pipeDuration(duration) : null} hours
               </span>
@@ -163,13 +169,13 @@ const CreateCourse:FC<CreateCourseProps> = ({ setAddCourse }) => {
           <p className='course-title'>Course authors</p>
           <ul className='course__authors'>
             {chosenAuthors.length !== 0 ? (
-              chosenAuthors.map((chosenAuthor) => {
+              chosenAuthors.map((author) => {
                 return (
-                  <li className='course__author' key={chosenAuthor.id}>
-                    <p>{chosenAuthor.name}</p>
+                  <li className='course__author' key={author.id}>
+                    <p>{author.name}</p>
                     <Button
                       buttonText={DELETE_AUTHOR_BUTTON_TEXT}
-                      onClick={() => onAuthorDeleted(chosenAuthor)}
+                      onClick={() => onAuthorDeleted(author)}
                     />
                   </li>
                 );
