@@ -1,3 +1,4 @@
+// CourseCard.tsx
 import { FC } from 'react';
 
 import Button from '../../../../common/Button/Button';
@@ -13,7 +14,7 @@ interface CourseCardProps {
   duration:number;
   creationDate:string;
   description:string;
-  authors:string[];
+  authors: string | string[];
 }
 
 const CourseCard:FC<CourseCardProps> = ({
@@ -28,7 +29,7 @@ const CourseCard:FC<CourseCardProps> = ({
       <div className='item__description'>
         <div className='item__field'>
           <span className='item__field--bold'>Authors: </span>
-          {authors.join(', ')} {/* Виведення авторів як рядка */}
+          {authors} 
         </div>
         <div className='item__field'>
           <span className='item__field--bold'>Duration: </span>
