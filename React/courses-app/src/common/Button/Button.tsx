@@ -1,12 +1,13 @@
+// Button.tsx
+import { FC, MouseEvent, ReactNode } from 'react';
 import './Button.css';
-import { FC, MouseEventHandler, ReactNode } from 'react';
 
 // інтерфейс, який визначає типи для buttonText, onClick та type
 interface ButtonProps {
   // щоб дозволити передачу будь-якого React-елементу в якості тексту кнопки
-  buttonText:ReactNode;
+  buttonText:string;
   // щоб вказати правильний тип події
-  onClick:MouseEventHandler<HTMLButtonElement>;
+  onClick: (event:MouseEvent<HTMLButtonElement>) => void;
   type?: 'button' | 'submit' | 'reset';
 }
 // використано FC (функціональний компонент)
