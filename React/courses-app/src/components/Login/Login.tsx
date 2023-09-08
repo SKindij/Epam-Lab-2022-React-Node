@@ -10,23 +10,30 @@ import { useHttp } from '../../hooks/useHttp';
 import './Login.css';
 
 const Login = () => {
+  // отримання контексту авторизації з AuthContext
 	const auth = useContext(AuthContext);
 	const { loading, error, request } = useHttp();
+  // стан для зберігання повідомлення про помилку
 	const [message, setMessage] = useState<string | null>(null);
+  // стан для зберігання введених даних	
 	const [email, setEmail] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
+  // стани для відстеження того, чи було відредаговано вхідні поля
 	const [emailDirty, setEmailDirty] = useState<boolean>(false);
 	const [passwordDirty, setPasswordDirty] = useState<boolean>(false);
+  // стани для відстеження помилок у введених даних
 	const [emailError, setEmailError] = useState<string>('Email should not be empty');
 	const [passwordError, setPasswordError] = useState<string>(
 		'Password should not be empty'
 	);
+  // стан для відстеження валідності форми	
 	const [formValid, setFormValid] = useState<boolean>(false);
 
+  //  якщо виникає помилка у error, вона зберігається у стані message
 	useEffect(() => {
 		setMessage(error);
 	}, [error]);
-
+  // якщо ж помилок немає, то форма вважається валідною
 	useEffect(() => {
 		if (emailError || passwordError) {
 			setFormValid(false);
@@ -35,7 +42,8 @@ const Login = () => {
 		}
 	}, [emailError, passwordError]);
 
-	const onEmailChanged = (e: ChangeEvent<HTMLInputElement>) => {
+  // обробники подій для введених даних:
+	const onEmailChanged = (e:ChangeEvent<HTMLInputElement>) => {
 		setEmail(e.target.value);
 		const reg = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
 		if (!reg.test(e.target.value.toLowerCase())) {
@@ -45,7 +53,7 @@ const Login = () => {
 		}
 	};
 
-	const onPasswordChanged = (e: ChangeEvent<HTMLInputElement>) => {
+	const onPasswordChanged = (e:ChangeEvent<HTMLInputElement>) => {
 		setPassword(e.target.value);
 		const reg = /^(?=.*[0-9])(?=.*[a-z])(?=\S+$).{8,}$/;
 		if (!reg.test(e.target.value.toLowerCase())) {
@@ -57,7 +65,8 @@ const Login = () => {
 		}
 	};
 
-	const blurHandler = (e: FocusEvent<HTMLInputElement>) => {
+  // обробник подій для втрати фокусу:
+	const blurHandler = (e:FocusEvent<HTMLInputElement>) => {
 		switch (e.target.name) {
 			case 'email':
 				setEmailDirty(true);
@@ -70,13 +79,15 @@ const Login = () => {
 		}
 	};
 
-	const formSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  // обробник подій для відправки форми:
+	const formSubmit = async (event:FormEvent<HTMLFormElement>) => {
 		const newUser = {
 			password,
 			email,
 		};
 		event.preventDefault();
 		try {
+		// відбувається відправка даних на сервер для авторизації
 			const data = await request(`/login`, 'POST', { ...newUser });
 			const token = data.result.substring(7);
 			const username = data.user.name;
