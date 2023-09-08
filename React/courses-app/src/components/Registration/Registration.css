@@ -1,0 +1,26 @@
+.registration__container {
+    height: 80vh;
+    width: 95vw;
+    margin: 20px auto;
+    border: 1px solid blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.registration__text {
+    text-align: center;
+}
+
+.registration__input {
+    margin: 10px;
+}
+
+.registration__btn {
+    margin: 20px;
+}
+.error {
+    color: red;
+    font-size: 12px;
+    text-align: center;
+}
