@@ -8,25 +8,28 @@ interface InputProps {
   placeholderText:string;
   // обробник, що очікує подію ChangeEvent та має доступ до HTMLInputElement
   onChange: (event:ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (event: FocusEvent<HTMLInputElement>) => void;
   type?: 'text' | 'password' | 'email' | 'number';
+  name:string;
   value:string;
   id?: string; // опціональний пропс для id
 }
 
 const Input:FC<InputProps> = ({
-    labelText, placeholderText, onChange,
-    type = 'text', value, id
+    labelText, placeholderText, onChange, onBlur,
+    type = 'text', name, value, id
   }) => {
   return (
-    <form className='form'>
+    <div className='form-input'>
       <label htmlFor={id}>{labelText}</label>
       <input
-        className='input' type={type} name='input'
+        className='input' type={type}
 		id={id} // вказує на htmlFor
-        onChange={onChange} value={value}
-        placeholder={placeholderText}       
+        onChange={onChange} onBlur={onBlur}
+		value={value} name={name}
+        placeholder={placeholderText}  
       />
-    </form>
+    </div>
   );
 };
 
