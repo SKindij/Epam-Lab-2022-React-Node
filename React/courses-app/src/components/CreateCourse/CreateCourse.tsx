@@ -99,10 +99,10 @@ const CreateCourse:FC<{ setAddCourse: (addCourse:boolean) => void }> = ({
     <div className='course-container'>
       <div className='course-container__toolbar'>
         <Input
-          labelText='Title'
+          labelText='Title' id='title'
           placeholderText='Enter course title...'
           onChange={onTitleChange}
-          value={title}
+          value={title} name='title'
         />
         <Button buttonText={CREATE_BUTTON_TEXT} onClick={onCourseCreate} />
         <Button buttonText='Cancel' onClick={onCancel} />
@@ -118,10 +118,10 @@ const CreateCourse:FC<{ setAddCourse: (addCourse:boolean) => void }> = ({
           <p className='course-title'>Add author</p>
           <div className='course-input'>
             <Input
-              labelText='Author name'
+              labelText='Author name' id='author'
               placeholderText='Enter author name...'
               onChange={onAuthorChange}
-              value={author}
+              value={author} name='author'
             />
           </div>
           <div className='course-btn'>
@@ -133,11 +133,11 @@ const CreateCourse:FC<{ setAddCourse: (addCourse:boolean) => void }> = ({
           <p className='course-title'>Duration</p>
           <div className='course-input'>
             <Input
-              type='number'
+              type='number' id='duration'
               labelText='Duration'
               placeholderText='Enter duration in minutes...'
               onChange={onDurationChange}
-              value={duration}
+              value={duration} name='duration'
             />
             <p>
               Duration:{' '}
