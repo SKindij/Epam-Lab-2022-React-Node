@@ -1,0 +1,11 @@
+
+.myInput{
+    border: 1px solid orange;
+    font-family: "Times New Roman", Times, serif;
+}
+
+.myLabel{
+    display: block;
+    font-size: small;
+    text-align:left;
+}
