@@ -1,0 +1,17 @@
+.subHeaderGroup {
+    margin: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+}
+
+.searchBarGroup{
+    display: flex;
+    align-items: center;
+}
+
+.searchInput{
+    height: 1.4rem;
+    margin: 0.3rem;
+}
