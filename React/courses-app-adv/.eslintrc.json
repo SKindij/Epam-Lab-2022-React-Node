@@ -1,0 +1,41 @@
+// .eslintrc.json
+{
+    // налаштування середовища
+    "env": {
+        "browser": true, // використовувати браузерне середовище
+        "es2021": true // підтримка ECMAScript 2021
+    },
+    // розширення правил
+    "extends": [
+        "react-app", // розширення для проектів React
+        "prettier" // використовувати Prettier для форматування
+    ],
+    // налаштування парсера
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true // підтримка JSX
+        },
+        "ecmaVersion": 12, // версія ECMAScript 12 (ES2021)
+        "sourceType": "module" // використовувати модульний синтаксис
+    },
+    // плагіни
+    "plugins": [
+        "react",
+        "prettier"
+    ],
+    // правила ESLint
+    "rules": {
+        "prettier/prettier": [
+            "error", {
+                "printWidth": 80, // максимальна ширина рядка
+                "trailingComma": "es5", // кома на останньому елементі у масиві та об'єкті
+                "semi": true, // вимагати крапку з комою
+                "jsxSingleQuote": true, // використовувати одинарні лапки у JSX
+                "singleQuote": true, // використовувати одинарні кавички
+                "useTabs": true, // використовувати табуляцію замість пробілів
+                "endOfLine": "auto", // використовувати автоматичні переводи рядка
+                "max-len": ["error", { "code": 80 }] // максимальна довжина рядка
+            }
+        ]
+    }
+}
