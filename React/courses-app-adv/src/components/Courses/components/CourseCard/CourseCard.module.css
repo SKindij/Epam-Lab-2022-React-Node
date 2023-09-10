@@ -1,0 +1,43 @@
+.courseCard {
+    border: 0.5rem solid teal;
+    margin: 0.5rem;
+    height: 150%;
+    display: flex;
+}
+
+.courseCardBody{
+    width: 75%;
+    margin: 0.5rem;
+}
+
+.courseCardInfo{
+    margin: 0.5rem;
+    display: grid;
+    align-items: center;
+}
+
+h4{
+    margin: 0.5rem;
+}
+
+.courseCardBtnsGroup{
+    display: flex;
+    justify-content: space-around;
+}
+
+.courseCardImg{
+    height: 0.75rem;
+    width: 0.8rem;
+}
+
+.courseCardBtn{
+    height: 2.5rem;
+    margin-left: 0.2rem;
+}
+
+.authorsCardInfo{
+    white-space: nowrap;
+    width: 15em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
