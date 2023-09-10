@@ -1,0 +1,10 @@
+.logoutItem{
+    display: inline-block;
+    padding: 0.5rem;
+    padding-right: 1rem;
+}
+
+.logoutGroup{
+    justify-content: center;
+    align-items: center;
+}
