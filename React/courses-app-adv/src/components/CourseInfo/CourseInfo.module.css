@@ -1,0 +1,39 @@
+.courseInfoGroup{
+    border: 1px solid teal;
+    text-align:center;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    height: 30rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.courseInfoColumns{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+}
+
+.courseDesc{
+    max-width: 50%;
+    padding: 1rem;
+}
+
+.courseRestInfo{
+    max-width: 40%;
+    padding: 1rem;
+    line-height: 1.6;
+}
+
+.courseBtn{
+    text-align: left;
+    padding: 1rem;
+}
+
+.courseLink{
+    text-decoration: none;
+}
+
+.courseInfoKeys{
+    padding-right: 0.5rem;
+}
