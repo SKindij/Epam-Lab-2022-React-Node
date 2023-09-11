@@ -60,4 +60,24 @@ src
 
 ```
 
+CourseCard component should contain the following information:
++ Title (Course name);
+2. Duration (format: hh:mm + 'hours');
+3. Creation date;
+4. Description;
+5. Show course button;
+6. Authors list
 
+
+Courses component should include:
++ SearchBar component.
++ CourseCard component.
++ Add new course button.
+
+
+Add functionality for searching courses:
+- User should have ability to search course by title and id;
+- The search is performed by the occurrence of characters in the string;
+- Case-insensitive search;
+- When user clicks on Search button it displays all courses that match the search query;
+- All courses are displayed when user cleans search field.
