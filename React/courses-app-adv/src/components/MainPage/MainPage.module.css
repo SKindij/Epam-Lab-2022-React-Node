@@ -1,0 +1,14 @@
+.mainGroup{
+    border: 1px solid teal;
+    text-align:center;
+    margin: 0.5rem;
+    height: 10rem;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainLink{
+    margin: 5px;
+}
