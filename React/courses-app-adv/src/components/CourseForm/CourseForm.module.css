@@ -1,0 +1,28 @@
+.CourseFormGroup{
+    border: 1px solid teal;
+    margin: 0.5rem;
+}
+
+.switchToCoursesBar{
+    margin: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.descInputGroup{
+    min-width: 2rem;
+    margin: 0.5rem;
+}
+
+.descLabel{
+    font-size: small;
+    text-align:left;
+}
+
+.descInput{
+    border: 1px solid #f0e68c;
+    font-family: "Times New Roman", Times, serif;
+}
