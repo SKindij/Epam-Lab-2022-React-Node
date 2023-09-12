@@ -1,0 +1,30 @@
+.addAuthorsGroup{
+    border: 1px solid black;
+    display:grid;
+    grid-template-columns: minmax(0, 50%) minmax(0, 50%);
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    padding: 0.5rem;
+    overflow: hidden;
+}
+
+.addAuthorBox{
+    align-items:center;
+    text-align: center;
+    justify-content:center;
+}
+
+.addAuthorBoxUl{
+    padding: 0.5rem;
+}
+
+.authorsListLi{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.2rem;
+}
+
+.addAuthorInput{
+    display: block;
+}
