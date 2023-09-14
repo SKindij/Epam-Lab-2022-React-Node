@@ -1,0 +1,33 @@
+.regGroup{
+    border: 1px solid teal;
+    text-align:center;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 30rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.regInput{
+    display: inline;
+    margin: 0.5rem;
+}
+
+.regLabel{
+    display: block;
+    font-size: x-small;
+}
+
+.regBtn{
+    margin: 0.5rem;
+}
+
+.regText{
+    font: 12px black;    
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.regLink{
+    text-decoration: none;
+}
+
