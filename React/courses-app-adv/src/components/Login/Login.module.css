@@ -1,0 +1,34 @@
+.loginGroup{
+    border: 1px solid teal;
+    text-align:center;
+    margin: 0.5rem;
+    height: 30rem;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginInput{
+    display: inline;
+    margin: 0.5rem;
+}
+
+.loginLabel{
+    display: block;
+    font-size: x-small;
+}
+
+.loginBtn{
+    margin: 0.5rem;
+}
+
+.loginText{
+    font: 12px black;    
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.regLink{
+    text-decoration: none;
+}
+
