@@ -57,9 +57,28 @@ A **Uniform Resource Locator (URL)** is an identifier that tells you how to get 
 - Url encoded - application/x-www-form-urlencoded
 
 
+### RESTful API
 
+It is acronym for REpresentational State Transfer. It is architectural style for distributed hypermedia systems.
 
+The key abstraction of information in **REST** is a resource. Any information that can be named can be a resource: a document or image, a temporal service, a collection of other resources, a non-virtual 
+object (e.g. a person), and so on. **REST** uses a resource identifier to identify the particular resource involved in an interaction between components.
 
+#### REST Design Principles
+
+* Everything is a Resource
+* Each Resource is identifiable by Unique URI
+* Use the standard HTTP methods
+* Allow multiple representations for the same Resource
+* Communication should always be stateless
+
+REST is a sofware architectual style that defines a set of constraints to be used for creating Web Services (API).
+
++ ``GET /users/`` returns a list of registered users
++ ``POST /users/`` creates a user using a body data
++ ``PUT /users/123`` update user 123 with body data
++ ``GET /users/123`` returns the details of user 123
++ ``DELETE /users/123`` deletes user 123
 
 
 
