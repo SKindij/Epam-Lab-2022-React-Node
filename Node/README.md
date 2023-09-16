@@ -24,21 +24,17 @@ A server computer can manage several clients simultaneously, whereas one client 
 In its simplest form, the internet is also based on client/server architecture where web servers serve many simultaneous users with website data.
 
 
+#### Modern web applications
+
+<p align="center">
+  <img src="https://github.com/SKindij/SKindij/blob/main/recources/modern-web-application.jpg" 
+    title="modern web-application" alt="modern web-application" width="700" height="400"/>  
+</p> 
 
 
 
 
-
-
-
-
-Modern web applications
-
-
-
-
-
-MPA vs SPA
+#### MPA vs SPA
 
 
 
