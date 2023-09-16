@@ -12,10 +12,24 @@
 
 It is a producer/consumer computing architecture where the server acts as the producer and the client as a consumer.\
 The server houses and provides high-end, computing-intensive services to the client on demand.\
-These services can include application access, storage, file sharing, printer access and/or direct access to the server’s raw computing power.\
+These services can include application access, storage, file sharing, printer access and/or direct access to the server’s raw computing power.
+
+<p align="center">
+  <img src="https://github.com/SKindij/SKindij/blob/main/recources/client-server-architecture.jpg" 
+    title="client-server architecture" alt="client-server architecture" width="800" height="240"/>  
+</p> 
+
 Client/server architecture works when the client computer sends a resource or process request to the server over the network connection, which is then processed and delivered to the client.\
 A server computer can manage several clients simultaneously, whereas one client can be connected to several servers at a time, each providing a different set of services.\
 In its simplest form, the internet is also based on client/server architecture where web servers serve many simultaneous users with website data.
+
+
+
+
+
+
+
+
 
 
 Modern web applications
