@@ -42,7 +42,13 @@ In its simplest form, the internet is also based on client/server architecture w
 ### HTTP
 
 The Hypertext Transfer Protocol (HTTP) is an application-level protocol for distributed, collaborative, hypermedia information systems.\
-This is the foundation for data communication for the World Wide Web (i.e. internet) since 1990.\
+This is the foundation for data communication for the World Wide Web (i.e. internet) since 1990.
+
+<p align="center">
+  <img src="https://github.com/SKindij/SKindij/blob/main/recources/Hypertext-Transfer-Protocol.jpg" 
+    title="Hypertext Transfer Protocol" alt="Hypertext Transfer Protocol" width="700" height="240"/>  
+</p> 
+
 HTTP is a generic and stateless protocol which can be used for other purposes as well using extensions of its request methods, error codes, and headers.
 
 
