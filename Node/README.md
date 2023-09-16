@@ -95,6 +95,124 @@ REST is a sofware architectual style that defines a set of constraints to be use
 + ``DELETE /users/123`` deletes user 123
 
 
+### Built-in HTTP Module
+
+```node
+   var http = require('http');
+```
+
+_Now your application has access to the HTTP module, and is able to create a server:_
+
+```node
+  http.createServer(function (req, res) { 
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.end('Hello World!');
+  }).listen(8080);
+```
+
+
+### Web server architecture
+
+<p align="center">
+  <img src="https://github.com/SKindij/SKindij/blob/main/recources/web-server-arch.jpg" 
+    title="web server architecture" alt="web server architecture" width="700" height="390"/>  
+</p> 
+
+
+## Web frameworks
+
+### Express.js
+
+```node
+  const express = require('express');
+  const app = express();
+  app.get('/', function (req, res) { 
+    res.json({ ok: true });
+  });
+  app.listen(3000);
+```
+
+#### Routing / Express.js 4.x API reference
+
+<p align="center">
+  <img src="https://github.com/SKindij/SKindij/blob/main/recources/routing-expres.jpg" 
+    title="routing expres" alt="routing expres" width="900" height="580"/>  
+</p>
+
+#### Response
+
+* Represents the HTTP response that an Express app sends for HTTP request
+* Sending response:
+  - res.end() 
+  - res.sendStatus() 
+  - res.send() 
+  - res.sendFile()
+  - res.json()
+  - res.redirect() 
+  - res.render()
+* **Express = Routing + Middlewares**
+  - • Execute any code
+  - • Make changes to the request and/or the response objects
+  - • End the request-response cycle
+  - • Call the next middleware in the stack
+
+#### REQUEST -> RESPONSE CYCLE
+
+<p align="center">
+  <img src="https://github.com/SKindij/SKindij/blob/main/recources/Request-Response-Cycle.jpg" 
+    title="Request Response Cycle" alt="Request Response Cycle" width="800" height="400"/>  
+</p>
+
+##### Example
+
+```node
+  app.put('/employees/:id', async (req, res) => {
+    const employee = await getEmployeeById(req.params.id);
+    if (!employee) {
+      return res.status(400).json({message: ‘No employee found'});
+    }
+    await employee.update(req.body); 
+    res.json({ status: 'ok' });
+  });
+```
+
+#### Request: body
+
++ Contains submitted data as key-value pairs and undefined by default
++ Use express.json() middleware to populate body from json
+
+```node
+  const express = require('express');
+  const app = express();
+
+  app.use(express.json());
+```
+
+#### Router
+
+```node
+  const express = require('express');
+  const app = express();
+  const router = express.Router();
+
+  router.use((req, res, next) => {
+    // some middleware
+    next();
+  });
+
+  router.get('/:id', (req, res) => { 
+    res.json({ id: req.params.id })
+  });
+
+  app.use('/users', router);
+```
+
+
+
+
+
+
+
 
 
 
