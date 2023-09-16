@@ -31,14 +31,12 @@ In its simplest form, the internet is also based on client/server architecture w
     title="modern web-application" alt="modern web-application" width="700" height="400"/>  
 </p> 
 
-
-
-
 #### MPA vs SPA
 
-
-
-
+<p align="center">
+  <img src="https://github.com/SKindij/SKindij/blob/main/recources/MPA-vs-SPA.jpg" 
+    title="MPA vs SPA" alt="MPA vs SPA" width="700" height="400"/>  
+</p> 
 
 
 ### HTTP
