@@ -10,7 +10,18 @@ const {
 // папка, в якій будуть зберігатися файли
 const FILE_DIR = './files/';
 const EXTENSIONS = ['.log', '.txt', '.json', '.yaml', '.xml', '.js'];
-const protectedFilesJSON = fs.readFileSync('protectedFiles.json', 'utf8');
+const protectedFilesJSON = fs.readFileSync('./protectedFiles.json', 'utf8');
+
+// функція, яка перевіряє існування файлу з вказаним іменем.
+function fileExists(filename) {
+  try {
+    const filePath = path.join(FILE_DIR, filename);
+    return fs.existsSync(filePath);
+  } catch (error) {
+    console.error(`Error checking file existence: ${error.message}`);
+    return false;
+  }
+}
 
 function createFile (req, res, next) {
   // code to create the file
@@ -71,9 +82,13 @@ function getFiles (req, res, next) {
 
 const getFile = (req, res, next) => {
   try {
-    let filename = req.url.slice(1);
+    let filename = req.params.filename;
+    // лог для відстеження запиту
+    console.log(`GET request for file: ${filename}`);
     // перевірка, чи існує файл з таким іменем
     if (!fileExists(filename)) {
+      // лог для відстеження помилки
+      console.error(`File not found: ${filename}`);
       next({
         status: 400,
         message: `No file with '${filename}' filename found`,
@@ -85,6 +100,8 @@ const getFile = (req, res, next) => {
       (item) => item.file.filename === filename
     );
     if (isProtectedFile && !req.query.password) {
+      // лог для відстеження помилки
+      console.error(`Protected file '${filename}' requires a password.`);
       next({
         status: 400,
         message: `This is a protected file. Provide the password.`,
@@ -99,27 +116,29 @@ const getFile = (req, res, next) => {
       // отримання вмісту незахищеного файлу
       fs.readFile(path.join(FILE_DIR, filename), 'utf-8', (err, data) => {
         if (err) {
+          // лог для відстеження помилки
+          console.error(`Error reading file: ${err.message}`);  
           next({
             status: 400,
             message: `No file with '${filename}' filename found`,
           });
           return;
         }
-
+        // лог для відстеження успішної операції
+        console.log(`Sending file: ${filename}`);
         res.status(200).send({
           message: 'Success',
           filename: path.basename(path.join(FILE_DIR, filename)),
           content: data,
           extension: path.extname(filename).slice(1),
-          uploadedDate: fs.statSync(path.join(FILE_PATH, filename)).birthtime,
+          uploadedDate: fs.statSync(path.join(FILE_DIR, filename)).birthtime,
         });
       });
     } 
   } catch (err) {
-    console.log('Server error');
-    res.status(500).send({
-      message: 'Server error',
-    });
+    // лог для відстеження помилки
+    console.error(`Server error: ${err.message}`);
+    res.status(500).send({message: 'Server error',});
   }  
 }
 
@@ -127,7 +146,7 @@ const getFile = (req, res, next) => {
 function editFile(req, res, next) {
   let filename = req.url.slice(1);
 
-  if (!fs.existsSync(path.join(FILE_PATH, filename))) {
+  if (!fs.existsSync(path.join(FILE_DIR, filename))) {
     next({
       status: 400,
       message: `No file with '${filename}' filename found`,
@@ -135,7 +154,7 @@ function editFile(req, res, next) {
     return;
   }
 
-  fs.appendFile(path.join(FILE_PATH, filename), updatedText, (err) => {
+  fs.appendFile(path.join(FILE_DIR, filename), updatedText, (err) => {
     if (err) {
       next({
         status: 400,
@@ -151,7 +170,7 @@ function editFile(req, res, next) {
 function deleteFile(req, res, next) {
   let filename = req.url.slice(1);
 
-  if (!fs.existsSync(path.join(FILE_PATH, filename))) {
+  if (!fs.existsSync(path.join(FILE_DIR, filename))) {
     next({
       status: 400,
       message: `No file with '${filename}' filename found`,
@@ -159,7 +178,7 @@ function deleteFile(req, res, next) {
     return;
   }
 
-  fs.unlink(path.join(FILE_PATH, filename), (err) => {
+  fs.unlink(path.join(FILE_DIR, filename), (err) => {
     if (err) {
       next({
         status: 400,
