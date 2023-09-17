@@ -2,14 +2,14 @@
 const fs = require('fs');
 const path = require('path');
 // визначення шляху до теки, де зберігаються файли
-const dirPath = path.dirname('./files/*');
+const dirPath = path.dirname('./files/');
 // перевірка наявності файлу 'protectedFiles' перед читанням
 if (!fs.existsSync('protectedFiles.json')) {
     fs.writeFileSync('protectedFiles.json', '[]', 'utf8');
 }
 try {
   // зчитування даних про захищені файли з файлу 'protectedFiles.json'
-  const protectedFilesJSON = fs.readFileSync('protectedFiles.json', 'utf8');
+  const protectedFilesJSON = fs.readFileSync('./protectedFiles.json', 'utf8');
 } catch (error) {
   console.error('Error reading protectedFiles.json:', error.message);
 }
@@ -34,33 +34,40 @@ function addToProtectedFiles(req) {
 }
 // ф-ція перевірки пароля та повернення вмісту захищеного файлу, якщо пароль правильний
 function checkPassword(filename, password, res) {
-	if (
-		JSON.parse(protectedFilesJSON).some(
-			(item) =>
-				item.file.filename === filename && item.file.password === password
-		)
-	) {
-        // якщо пароль правильний, то читаємо захищений файл та повертаємо його
-		const content = fs
-			.readFileSync(`${dirPath}/${filename}`)
-			.toString();
-        // отримуємо дату завантаження та розширення файлу
-		const uploadedDate = fs.statSync(`${dirPath}/${filename}`).birthtime;
-		const extension = path.extname(filename).slice(1);
-        // повертаємо успішну відповідь разом із даними про файл
-		return res.status(200).send({
-			message: 'Success',
-			filename: filename,
-			content: content,
-			extension: extension,
-			uploadedDate: uploadedDate,
-		});
-	} else {
-        // якщо пароль невірний, повертаємо помилку з відповідним повідомленням
-		return res.status(400).send({
-			message: 'This is protected file, write correct password',
-		});
-	}
+  // лог для відстеження операції
+  console.log(`Checking password for file: ${filename}`);
+  if (
+	JSON.parse(protectedFilesJSON).some(
+	  (item) =>
+		item.file.filename === filename && item.file.password === password
+	)
+  ) {
+	// лог для відстеження операції
+	console.log(`Password for file '${filename}' is correct`);
+    // якщо пароль правильний, то читаємо захищений файл та повертаємо його
+	const content = fs
+	  .readFileSync(`${dirPath}/${filename}`)
+	  .toString();
+      // отримуємо дату завантаження та розширення файлу
+	  const uploadedDate = fs.statSync(`${dirPath}/${filename}`).birthtime;
+	  const extension = path.extname(filename).slice(1);
+      // повертаємо успішну відповідь разом із даними про файл
+	  console.log(`Sending protected file: ${filename}`);
+	  return res.status(200).send({
+		message: 'Success',
+		filename: filename,
+		content: content,
+		extension: extension,
+		uploadedDate: uploadedDate,
+	  });
+  } else {
+	// лог для відстеження операції
+	console.log(`Password for file '${filename}' is incorrect`);
+      // якщо пароль невірний, повертаємо помилку з відповідним повідомленням
+	  return res.status(400).send({
+		message: 'This is protected file, write correct password',
+	  });
+  }
 }
 module.exports = {
 	addToProtectedFiles,
