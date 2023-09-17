@@ -10,7 +10,6 @@ const {
 // папка, в якій будуть зберігатися файли
 const FILE_DIR = './files/';
 const EXTENSIONS = ['.log', '.txt', '.json', '.yaml', '.xml', '.js'];
-const protectedFilesJSON = fs.readFileSync('./protectedFiles.json', 'utf8');
 
 // функція, яка перевіряє існування файлу з вказаним іменем.
 function fileExists(filename) {
@@ -85,6 +84,8 @@ const getFile = (req, res, next) => {
     let filename = req.params.filename;
     // лог для відстеження запиту
     console.log(`GET request for file: ${filename}`);
+    // завантажуємо дані з файлу 'protectedFiles.json' при кожному запиті
+    const protectedFilesJSON = fs.readFileSync('./protectedFiles.json', 'utf8');
     // перевірка, чи існує файл з таким іменем
     if (!fileExists(filename)) {
       // лог для відстеження помилки
@@ -97,7 +98,7 @@ const getFile = (req, res, next) => {
     }
     // перевірка, чи файл захищений і чи передано пароль
     const isProtectedFile = JSON.parse(protectedFilesJSON).some(
-      (item) => item.file.filename === filename
+      (item) => item.filename === filename
     );
     if (isProtectedFile && !req.query.password) {
       // лог для відстеження помилки
@@ -145,6 +146,8 @@ const getFile = (req, res, next) => {
 // Other functions - editFile, deleteFile
 function editFile(req, res, next) {
   let filename = req.url.slice(1);
+  // отримати оновлений текст з тіла запиту
+  const { updatedText } = req.body;
 
   if (!fs.existsSync(path.join(FILE_DIR, filename))) {
     next({
