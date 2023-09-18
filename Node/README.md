@@ -207,6 +207,41 @@ _Now your application has access to the HTTP module, and is able to create a ser
   app.use('/users', router);
 ```
 
+## Authentication
+
+* Authentication types
+  - Basic(Password-based authentication) 
+  - JSON Web Token (JWT)
+  - OAuth
+* Credentials transfer in HTTP
+  - Request body 
+  - HTTP header
+
+#### Basic Auth
+
+
+
+
+#### Oauth2.0
+
+
+
+
+
+#### JWT
+
+
+
+
+
+### Cookie vs Token Authentication
+
+
+
+
+
+
+
 
 
 
