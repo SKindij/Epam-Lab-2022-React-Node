@@ -1,0 +1,148 @@
+*{
+  box-sizing: border-box;
+}
+body{
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Open Sans' ,sans-serif;
+}
+
+button{
+  padding: 0.6em 1em;
+  border-radius: 3px;
+  border: none;
+  color: #777;
+  box-shadow: 0px 1px 2px #bbb;
+  cursor: pointer;
+}
+button:hover{
+  background-color: #4169e1;
+  box-shadow: 0px 1px 2px inset #1f44b3;
+  color: #fff;
+}
+input{
+  padding: 0.6em 1em;
+  margin: 0;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0px 1px 2px inset #bbb;
+}
+form{
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2em;
+  margin: 4em auto;
+  box-shadow: 0px 3px 5px #bbb;
+  border-radius: 10px;
+  gap: 1em;
+}
+
+.login-block,
+.register-block{
+  width: 100%;
+}
+
+.notes-block {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+
+.edit-text{
+  display: none;
+}
+
+.new-note-container{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 70% auto;
+  grid-template-rows: auto;
+  grid-template-areas: 'input button';
+  gap: 1em;
+  margin-bottom: 2em;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 2em;
+}
+.new-note-container input{
+  grid-area: input;
+  font-size: 1em;
+  padding: 0.6em 1em;
+}
+.note{
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: auto;
+  grid-template-areas: 'input input input edit del done';
+  gap: 1em;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #eee;
+}
+.note button{
+  visibility: hidden;
+}
+.note:hover button {
+  visibility: visible;
+}
+.notes-container{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1em;
+}
+.note input,
+.note label{
+  width: 250px;
+  grid-area: input;
+  font-size: 1em;
+  padding: 0.6em 1em;
+}
+.note-edit-save{
+  grid-area: edit;
+}
+.note-delete{
+  grid-area: del;
+}
+.note-done{
+  grid-area: done;
+}
+.create-note{
+  background-color: #4169e1;
+  grid-area: button;
+  color: #fff;
+}
+.edit-profile,
+.logout{
+  align-self: flex-end;
+  font-size: 0.9em;
+}
+
+.note.completed {
+  border: 1px solid green;
+}
+
+.note.completed .note-done {
+  background-color: green;
+  color: #fff;
+}
+
+/*clean css*/
+
+.profile-block{
+  display: none;
+  flex-direction: column;
+  width: 100%;
+}
