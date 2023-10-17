@@ -21,22 +21,15 @@
 │   ├─ usersService.js
 │   ├─ notesService.js
 │   │
+│   ├─ 📁 models/
+│   │   ├─ Users.js
+│   │   └─ Notes.js
+│   │
 │   └─ 📁 middleware/
-│      └─ authMiddleware
+│      └─ authMiddleware.js
 │
-├─ 📁 /
-│   ├─ 
-│   └─ 
-│
-├─ 📁 /
-│   └─ 
-│
-├─ 📁 /
-│   ├─ Link.js
-│   └─ User.js
-│
-└─ 📁 routes/
-   ├─ auth.routes.js
-   ├─ link.routes.js
-   └─ redirect.routes.js
+└─ 📁 frontend/
+   ├─ index.html
+   ├─ style.css
+   └─ app.js
 ```    
