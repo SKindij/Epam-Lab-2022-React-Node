@@ -72,34 +72,43 @@ const getNote = (req, res, next) => {
 const updateNote = async (req, res, next) => {
   try {
 	// пробуємо знайти нотатку, яку користувач бажає оновити
-    const note = await Note.find({userId: req.user.userId, _id: req.params.id});
-    // Параметр з тіла запиту, який містить новий текст для нотатки.
+    const note = await Note.findOne({userId: req.user.userId, _id: req.params.id});
+      if (!note) {
+        // Якщо нотатку не знайдено, ви можете повернути відповідь, наприклад, 404 Not Found.
+        return res.status(404).json({ message: 'Note not found' });
+      }
+	  console.log('Found note:', note);
+	// Параметр з тіла запиту, який містить новий текст для нотатки.
     const {text} = req.body;
-    // note[0] (перший результат знайденого запиту) оновлюється на новий текст
-    if (text) note[0].text = text;
+	  console.log('Received text:', text);
+    // note оновлюється на новий текст
+	if (text) note.text = text;
     // зберігаємо оновлену нотатку в базі даних
-    return note[0].save().then((saved) =>
+    return note.save().then((saved) =>
       res.json({message: 'Success', note: saved}));
+	    console.log('Updated note:', saved);
   } catch (err) {
-    if (err) throw err;
+    console.error('An error occurred:', err);
+    return res.status(500).json({ message: 'Internal Server Error' });
   }
 };
 
 // Функція для оновлення статусу нотатки (виконано/не виконано)
 const updateNoteStatus = async (req, res, next) => {
   try {
-    const note = await Note.find({userId: req.user.userId, _id: req.params.id});
+    const note = await Note.findOne({userId: req.user.userId, _id: req.params.id});
 
-    if (note[0].completed === false) {
-      note[0].completed = true;
+    if (note.completed === false) {
+      note.completed = true;
     } else {
-      note[0].completed = false;
+      note.completed = false;
     }
 
-    return note[0].save().then((saved) =>
+    return note.save().then((saved) =>
       res.json({message: 'Success', note: saved}));
   } catch (err) {
-    if (err) throw err;
+    console.error('An error occurred:', err);
+    return res.status(500).json({ message: 'Internal Server Error' });
   }
 };
 
