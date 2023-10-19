@@ -16,12 +16,13 @@ function createNote(req, res, next) {
     note.save().then((saved) => {
 	  // відправляємо відповідь клієнту у форматі JSON
       res.json({
-        message: 'Success', // операція була успішною
+        message: 'Note created successfully', // операція була успішною
         saved, // містить інформацію про збережену нотатку
       });
     });
   } catch (err) {
-    if (err) throw err;
+    console.error('An error occurred:', err);
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 }
 
@@ -85,7 +86,7 @@ const updateNote = async (req, res, next) => {
 	if (text) note.text = text;
     // зберігаємо оновлену нотатку в базі даних
     return note.save().then((saved) =>
-      res.json({message: 'Success', note: saved}));
+      res.json({message: 'Note updated successfully', note: saved}));
 	    console.log('Updated note:', saved);
   } catch (err) {
     console.error('An error occurred:', err);
@@ -105,7 +106,7 @@ const updateNoteStatus = async (req, res, next) => {
     }
 
     return note.save().then((saved) =>
-      res.json({message: 'Success', note: saved}));
+      res.json({message: 'Note status updated', note: saved}));
   } catch (err) {
     console.error('An error occurred:', err);
     return res.status(500).json({ message: 'Internal Server Error' });
@@ -126,7 +127,8 @@ const deleteNote = (req, res, next) =>{
           .send({message: `Note ${req.params.id} successfully deleted`});
       });
   } catch (err) {
-    if (err) throw err;
+    console.error('An error occurred:', err);
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 };
 
