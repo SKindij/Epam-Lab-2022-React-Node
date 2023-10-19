@@ -432,54 +432,67 @@ async function deleteNote(e) {
 
 // дозволяє користувачеві редагувати нотатку,
 function editNote(e) {
+  // отримуємо батьківський елемент кнопки "Edit"
   const note = this.parentNode;
+  // посилання на HTML-елементи label та input для цього контейнера
   const noteLabel = note.querySelector('label');
   const noteInput = note.querySelector('input');
 
-  noteLabel.style.display = 'none';
-  noteInput.style.display = 'block';
+    noteLabel.style.display = 'none';
+    noteInput.style.display = 'block';
 
   noteInput.placeholder = noteLabel.innerHTML;
 
   e.target.addEventListener('click', editNote);
+  // видаляємо обробник події кнопки "Edit"
+  e.target.removeEventListener('click', editNote);
   e.target.innerHTML = 'Save';
+  // додаємо обробник події для кнопки "Save"
   e.target.addEventListener('click', saveNote);
 }
 
 // зберігає редаговану нотатку на сервері
 function saveNote(e) {
+	console.log('LOG1 (saveNote): start save function');
+  // отримання токену, встановленого під час входу користувача 
   const jwt_token = window.localStorage.getItem('jwt_token');
-  const note = e.path[1];
+    console.log('LOG2 (saveNote): received jwt_token');
+  // визначаємо, яку саме нотатку користувач хоче відредагувати
+    console.log('LOG3 (saveNote): ', e);
+  // const note = e.path[1];   
+  const note = e.target.parentNode;
     if (!note) {
       console.error('Note element is undefined');
       return;
     }
-  const noteId = e.path[1].dataset.id;
+    console.log('LOG4 (saveNote): ', note);
+  // const noteId = e.path[1].dataset.id;
+  const noteId = e.target.parentNode.dataset.id;
     if (!noteId) {
       console.error('Note ID is not found');
       return;
     }
+	console.log('LOG5 (saveNote): ', noteId);
   const noteLabel = note.querySelector('.text');
   const noteInput = note.querySelector('.edit-text');
     if (!noteLabel || !noteInput) {
       console.error('Note label or input is not found');
       return;
     }
-
+  // створення об'єкта заголовків із токеном
   const myHeaders = new Headers();
-  myHeaders.append('Authorization', 'Bearer ' + jwt_token);
+    myHeaders.append('Authorization', 'Bearer ' + jwt_token);
+  // JSON-представлення нового тексту нотатки
+  const raw = JSON.stringify({text: noteInput.value});
 
-  const raw = JSON.stringify({
-    text: noteInput.value,
-  });
-
-  var requestOptions = {
+  let requestOptions = {
     method: 'PUT',
     headers: myHeaders,
     body: raw,
     redirect: 'follow',
   };
-
+    console.log('LOG4 (saveNote): start fetch(noteId)');
+  // запит до URL, де {noteId} - ідентифікатор нотатки, яку користувач редагує.
   fetch(`http://localhost:8080/api/notes/${noteId}`, requestOptions)
     .then((response) => response.text())
     .then((result) => {
