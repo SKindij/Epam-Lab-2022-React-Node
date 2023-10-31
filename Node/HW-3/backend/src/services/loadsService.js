@@ -40,7 +40,7 @@ const assignTruckToLoad = async (loadID, truckID, driverID) => {
     assigned_to: truckID, // призначено до
 	// "$set" вказує MongoDB на заміну значення певного поля на нове
 	// або додавання нового поля, якщо воно раніше не існувало
-    $set: { state: 'En route to Pick Up (на шляху до місця забору)' },
+    $set: { state: 'En route to Pick Up' },
 	// "$push" вказує MongoDB на додавання нового значення до масиву
 	// додає запис до журналу вантажу
     $push: {
