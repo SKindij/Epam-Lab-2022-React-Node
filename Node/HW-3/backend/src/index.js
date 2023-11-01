@@ -2,9 +2,9 @@
 require('dotenv').config();
 const express = require('express') // для створення серверів
   const app = express() // створюємо екземпляр сервера
-const morgan = require('morgan')
+const morgan = require('morgan') // Middleware для логування запитів
 const cors = require('cors')
-const mongoose = require('mongoose')
+const mongoose = require('mongoose') // Бібліотека для роботи з MongoDB
 
 const { authRouter } = require('./routers/authRouter')
 const { usersRouter } = require('./routers/usersRouter')
@@ -49,6 +49,7 @@ app.use(
 
 app.listen(process.env.PORT, () => console.log(`Server running on port ${process.env.PORT}`))
 
+// Middleware для обробки помилок серверу
 app.use(errorHandler)
 
 function errorHandler(err, req, res, next) {
