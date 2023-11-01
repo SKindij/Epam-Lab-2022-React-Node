@@ -5,7 +5,9 @@ import Layout from './pages/Layout'
 import Registration from './pages/Registration'
 import Login from './pages/Login'
 import Profile from './pages/Profile'
-
+import Reset from './pages/Reset'
+import DashboardShipper from './pages/DashboardShipper'
+import DashboardDriver from './pages/DashboardDriver'
 
 import RequireAuth from './components/RequireAuth'
 import useAuth from './hooks/useAuth'
@@ -20,7 +22,7 @@ export default function App() {
           {/* "сторінки авторизації/аутентифікації" */}
           <Route path='register' element={<Registration />} />
           <Route path='login' element={<Login />} />
-
+          <Route path='reset' element={<Reset />} />
 
         {/* "визначення контенту по ролі" */}
         <Route element={<RequireAuth allowedRoles={['DRIVER', 'SHIPPER']} />}>
@@ -40,21 +42,15 @@ export default function App() {
         </Route>
 
         {/* "контент для вантажовідправника" */}
-
-
-
-
+        <Route element={<RequireAuth allowedRoles={['SHIPPER']} />}>
+            <Route path='dashboard/shipper' element={<DashboardShipper />} />
+        </Route>
 
         {/* "контент для перевізника" */}
-
-
-
-
-
-
-
-
-
+        <Route element={<RequireAuth allowedRoles={['DRIVER']} />}>
+            <Route path='dashboard/driver' element={<DashboardDriver />} />
+        </Route>
+        
       </Route>
     </Routes>
   )
